@@ -12,4 +12,6 @@ function revert() {
     git reset --hard
 }
 
+cd $TCR_REPO
+
 test && commit || revert
