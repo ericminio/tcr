@@ -9,5 +9,5 @@ nvm use
 
 cd $DIR
 
-./tcr-maybe.sh
-fswatch $TCR_FOLDER | xargs -n1 ./tcr-maybe.sh
+./tcr.sh
+fswatch $TCR_FOLDER | xargs -n1 ./tcr.sh

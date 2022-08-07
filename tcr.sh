@@ -1,15 +1,30 @@
 #!/bin/bash
 
 function test() {
-    npm test
+    echo "tcr -> test"
+    npm test    
 }
 function commit() {
-    git add .
-    git commit -m tcr
-    git log --reverse -n 1
+    echo "tcr -> commit"
+    clean=$(git status | grep "nothing to commit" | wc -l)
+    if [ $clean = 1 ]; then
+        echo "nothing to commit"
+        return 0
+    else
+        git add .
+        git commit -m tcr
+    fi
 }
 function revert() {
-    git reset --hard
+    echo "tcr -> revert"
+    clean=$(git status | grep "nothing to commit" | wc -l)
+    if [ $clean = 1 ]; then
+        echo "discarding commit:"
+        git show HEAD        
+        git reset --hard HEAD~1
+    else
+        git reset --hard
+    fi
 }
 
 cd $TCR_REPO
